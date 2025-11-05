@@ -1,6 +1,9 @@
 # macOS system files
 .DS_Store
 
+# Virtual environments
+.venv/
+
 # LaTeX build artifacts
 *.aux
 *.bbl
