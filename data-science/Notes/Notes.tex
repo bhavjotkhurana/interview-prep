@@ -94,6 +94,25 @@ Lower RSE indicates tighter fit around the regression line.
     \item \textbf{Practical use}: Combine coefficient estimates with confidence or prediction intervals to communicate both central tendency and uncertainty in predictions.
 \end{itemize}
 
+\subsection{Example: Simple Linear Regression Output}
+Using the \texttt{Advertising} dataset (TV spend predicting sales), the \texttt{statsmodels} summary reports the following key statistics:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lcc}
+        \hline
+        Statistic & Estimate & Interpretation \\ 
+        \hline
+        Intercept (\(\hat{\beta}_0\)) & 7.03 & Baseline sales when TV spend is \$0k. \\ 
+        TV coefficient (\(\hat{\beta}_1\)) & 0.0475 & Each \$1k on TV adds approximately 0.048k units sold. \\ 
+        $R^2$ & 0.612 & 61.2\% of variance in sales explained by TV. \\ 
+        F-statistic & 312.1 (p $< 10^{-40}$) & The model is highly significant overall. \\ 
+        \hline
+    \end{tabular}
+\end{table}
+
+The printed OLS table also shows small standard errors and very large t-statistics for the slope, so the p-value for the TV coefficient is essentially zero. Residual diagnostics (Omnibus, Jarque-Bera, Durbin-Watson) indicate roughly normal residuals and limited autocorrelation for this example.
+
 \section{Topic 2: Multiple Linear Regression}
 \subsection{Definition}
 Multiple Linear Regression (MLR) extends the linear model to \(p\) predictors:
@@ -108,6 +127,27 @@ The model-wide F-test compares the explained variance to unexplained variance:
 F = \frac{(\text{TSS} - \text{RSS}) / p}{\text{RSS} / (n - p - 1)}
 \]
 A large F-statistic (with a small p-value) indicates that, taken together, the predictors explain significantly more variation than an intercept-only model. If the F-test is not significant, it implies the collective set of predictors may not offer meaningful predictive power beyond the mean of \(y\).
+
+\subsection{Example: Multiple Linear Regression Output}
+Fitting TV, radio, and newspaper spend simultaneously to predict sales yields the following summary highlights:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lcc}
+        \hline
+        Statistic & Estimate & Interpretation \\ 
+        \hline
+        Intercept & 2.94 & Baseline sales when all spends are zero. \\ 
+        TV coefficient & 0.0458 & Positive, highly significant effect (p $< 10^{-50}$). \\ 
+        Radio coefficient & 0.1885 & Strong positive effect (p $< 10^{-40}$). \\ 
+        Newspaper coefficient & -0.0010 & Not significant (\(p \approx 0.86\)). \\ 
+        $R^2$ & 0.897 & 89.7\% of sales variance explained jointly. \\ 
+        F-statistic & 570.3 (p $< 10^{-90}$) & Model is overwhelmingly significant. \\ 
+        \hline
+    \end{tabular}
+\end{table}
+
+Compared with the simple-regression model, $R^2$ jumps from 0.61 to 0.90, showing the value of additional predictors. However, the newspaper coefficient's large p-value signals it may not contribute meaningfully, suggesting a model refinement (e.g., dropping the variable) could be appropriate.
 
 \section{Topic 3: Machine Learning}
 \subsection{Supervised Learning}
