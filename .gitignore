@@ -3,6 +3,7 @@
 
 # Virtual environments
 .venv/
+ignore/
 
 # LaTeX build artifacts
 *.aux
