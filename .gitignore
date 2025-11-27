@@ -3,6 +3,8 @@
 
 # Virtual environments
 .venv/
+
+#Folders
 ignore/
 
 # LaTeX build artifacts
