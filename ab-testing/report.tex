@@ -1,0 +1,110 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+
+\title{A/B Test Analysis: Ad Campaign Variant}
+\author{ }
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+This white paper summarizes an A/B test comparing a control ad campaign to a test variant. The objective was to assess impact on purchases (primary) while monitoring cost efficiency and intermediate conversion rates. Data comprised 29 control rows and 30 test rows; an aligned view (29/29) removes one test-only date to check robustness.
+
+\section{Data and Metrics}
+\begin{itemize}
+    \item \textbf{Primary}: Purchases.
+    \item \textbf{Guardrail}: Cost per acquisition (CPA = purchases / spend).
+    \item \textbf{Supporting}: Purchase per reach, purchase per impression.
+    \item \textbf{Spend}: Included as a budget guardrail (not to increase materially).
+    \item Preprocessing: Dropped one all-NA control row; created aligned set with common dates only.
+\end{itemize}
+
+\section{Methods}
+\begin{itemize}
+    \item Tests: Welch two-sample t-test (unequal variances) and Mann--Whitney U as robustness.
+    \item Multiple comparisons: Benjamini--Hochberg FDR on p-values per dataset (full, aligned).
+    \item Uncertainty: Bootstrap 95\% CIs for mean differences.
+    \item Interpretation focuses on direction, magnitude, and statistical significance (alpha = 0.05).
+\end{itemize}
+
+\section{Results}
+\subsection{Key Point Summary}
+\begin{itemize}
+    \item Purchases: No significant difference; wide CI includes both lift and decline.
+    \item CPA: No significant difference; cost efficiency inconclusive.
+    \item Conversion rates: Test significantly increases purchase per reach (\textasciitilde126\%) and purchase per impression (\textasciitilde70\%) in both full and aligned analyses; survives FDR.
+    \item Spend: Test spends \textasciitilde11\% more; increase is statistically significant (guardrail broken).
+\end{itemize}
+
+\subsection{Metric Table (Full Dataset: n\_test = 30, n\_ctrl = 29)}
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{lrrrrr}
+\toprule
+Metric & Test Mean & Ctrl Mean & Abs Diff & \% Diff & t p (FDR) \\
+\midrule
+Purchases & 521.23 & 522.79 & -1.56 & -0.30\% & 0.976 (0.976) \\
+CPA & 0.2066 & 0.2320 & -0.0255 & -10.97\% & 0.280 (0.374) \\
+Purchase / Reach & 0.01413 & 0.00633 & 0.00780 & 123.15\% & 0.0042 (0.0085) \\
+Purchase / Impression & 0.00843 & 0.00500 & 0.00342 & 68.48\% & 0.0020 (0.0080) \\
+Spend (USD) & 2563.07 & 2304.07 & 259.00 & 11.2\% & 0.0071 (--) \\
+\bottomrule
+\end{tabular}
+\caption{Welch t-test p-values shown with FDR in parentheses where applied. Spend guardrail not FDR-adjusted. Mann--Whitney U agreed on significance patterns.}
+\end{table}
+
+\subsection{Metric Table (Aligned Dataset: n\_test = 29, n\_ctrl = 29)}
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{lrrrrr}
+\toprule
+Metric & Test Mean & Ctrl Mean & Abs Diff & \% Diff & t p (FDR) \\
+\midrule
+Purchases & 512.72 & 522.79 & -10.07 & -1.93\% & 0.8469 (0.8469) \\
+CPA & 0.2022 & 0.2320 & -0.0299 & -12.87\% & 0.2052 (0.2736) \\
+Purchase / Reach & 0.01434 & 0.00633 & 0.00801 & 126.45\% & 0.0045 (0.0089) \\
+Purchase / Impression & 0.00848 & 0.00500 & 0.00348 & 69.65\% & 0.0023 (0.0090) \\
+Spend (USD) & 2572.24 & 2304.07 & 268.17 & 11.6\% & 0.0060 (--) \\
+\bottomrule
+\end{tabular}
+\caption{Aligned excludes the single test-only date; conclusions unchanged.}
+\end{table}
+
+\subsection{Confidence Intervals for Mean Differences (Full)}
+\begin{itemize}
+    \item Purchases: [-109.46, 91.21]
+    \item CPA: [-0.0747, 0.0162]
+    \item Purchase / Reach: [0.0036, 0.0135]
+    \item Purchase / Impression: [0.0015, 0.0056]
+    \item Spend: [84.58, 435.92]
+\end{itemize}
+
+\section{Interpretation}
+\begin{itemize}
+    \item The test variant improves conversion efficiency (per reach/impression) with strong statistical support.
+    \item Total purchases show no statistically detectable change; with current sample, both lift and decline remain plausible.
+    \item CPA is inconclusive; CIs cross zero, so no clear efficiency gain.
+    \item Spend increases by \textasciitilde11\% with significance, breaking the spend guardrail; higher cost accompanies the conversion-rate gains.
+\end{itemize}
+
+\section{Limitations}
+\begin{itemize}
+    \item Small sample size (29--30 rows per group) yields wide CIs on purchases and CPA.
+    \item One test-only date; robustness checked via aligned analysis.
+    \item No revenue/AOV data, so monetary impact beyond CPA cannot be quantified.
+\end{itemize}
+
+\section{Recommendation}
+\begin{itemize}
+    \item Treat current evidence as positive for conversion efficiency but neutral/negative on budget: the guardrail spend increase is significant, while purchases and CPA are inconclusive.
+    \item If budget is constrained, classify as neutral/negative pending more data or cost control.
+    \item If budget can flex, consider extending the experiment to reduce uncertainty on purchases and CPA, and add revenue/AOV to assess ROI and revenue per impression/reach.
+\end{itemize}
+
+\end{document}
