@@ -46,12 +46,16 @@
   \item fault is one component of a system deviating from its spec
   \item failure: system as a whole stops providing the service to the user
   \item fault tolerance mechanisms are important 
-  \item Netflix Chaos Monkey
+  \item Netflix Chaos Monkey: a revolutionary tool that randomly disables virtual machines and services in its production environment to test system resilience
   \item hard disk MTTF (mean time to failure) is 10-50 years, 10000 disks, on average 1 disk to die per day
   \item mo machines mo problems
   \item Virutal Machine instances stop running without warning because it is sometimes needed somewhere else 
   \item Software Errors: 
   \item independent events generally, a large number don't fail all at once 
+  \item automated testing: config changes -> possible issues -> slow rollout so only a few users are affected if at all 
+  \item telemetry: track and monitor failures
+  \item discussing scalablility is trying to figure out how to cope with growth in whichever way you are growing (current load, and then incr. load)
+  \item twitter example (Nov 2012 data): 4600 req./s, views 300,000 req/s, tweet volume + fan out. Two way s of implementing follower followee. Global collection is an option and then you merge those where follower and followee (original approach). do more work at write time and less at read time so just write the tweets on their home timelines (new approach). "Fan out load". Twitter now hybrids b/w the 2. Celebs are fetched separately like in Approach 1. 
   \item 
 \end{itemize}
 
