@@ -55,7 +55,7 @@
   \item automated testing: config changes -> possible issues -> slow rollout so only a few users are affected if at all 
   \item telemetry: track and monitor failures
   \item discussing scalablility is trying to figure out how to cope with growth in whichever way you are growing (current load, and then incr. load)
-  \item twitter example (Nov 2012 data): 4600 req./s, views 300,000 req/s, tweet volume + fan out. Two way s of implementing follower followee. Global collection is an option and then you merge those where follower and followee (original approach). do more work at write time and less at read time so just write the tweets on their home timelines (new approach). "Fan out load". Twitter now hybrids b/w the 2. Celebs are fetched separately like in Approach 1. 
+  \item twitter example (Nov 2012 data): 4600 req./s, views 300,000 req/s, tweet volume + fan out. Two ways of implementing follower followee. Global collection is an option and then you merge those where follower and followee (original approach). do more work at write time and less at read time so just write the tweets on their home timelines (new approach). "Fan out load". Twitter now hybrids b/w the 2. Celebs are fetched separately like in Approach 1. 
   \item System performance based on load parameters
   \item performance numbers: Hadoop -- care about "Throughput"
   \item median is good, mean is whatever
@@ -68,6 +68,9 @@
   \item Right way of aggregating response time data is histograms 
   \item approaches for coping with load:
   \item shared nothing architecture -- high end machines get expensive so you can't scale out sometimes so you have one machine
+  \item no such thing as a one size fits all scaling architecure: volume of reads/writes, the volume of data to store, data complexity, response time requirements, access patters, usually a combination of them all
+  \item a system designed to handle a 100k 1kB requests in a minute is different that one designed to handle 3 2gB requests in a minute.
+  \item load parameters <8 early stage startups need to be able to iterate on product things more than they need to focus on having a "perfectly scalable" architecture 
   \item 
 \end{itemize}
 
