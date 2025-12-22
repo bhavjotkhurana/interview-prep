@@ -1,0 +1,104 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\title{Designing Data-Intensive Applications\\Notes}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section*{How to Use This Template}
+\addcontentsline{toc}{section}{How to Use This Template}
+\begin{itemize}
+  \item Create a new \textbf{Chapter} section for each audiobook chapter.
+  \item Capture key ideas, notable quotes, and takeaways in the provided subsections.
+  \item Add action items or open questions you want to revisit.
+\end{itemize}
+\newpage
+
+\section{Chapter \# -- Title}
+\subsection{General}
+\begin{itemize}
+  \item Redis, Apache Kafka (boundaries blurred)
+  \item Single tool can't any longer meet data needs 
+  \item work is broken down into tasks into multiple tools
+  \item mem-cached, elastic search, solar -- application code keeps all this synced
+  \item API hides implementation details from clients
+  \item how do you ensure data remains correct and complete? 
+  \item how do you scale? 
+  \item what API is best
+  \item how do you have an issue but the client can still be fine
+  \item Book considers 3 concerns: reliability (toyota style), scalability, maintainibility (chnaging people should be able to work on the system productively)
+  \item following chapters: architectures and algos important to achieve these
+  \item Reliability: 
+  \item faults and fault tolerant systems in reliability
+  \item fault is one component of a system deviating from its spec
+  \item failure: system as a whole stops providing the service to the user
+  \item fault tolerance mechanisms are important 
+  \item Netflix Chaos Monkey
+  \item hard disk MTTF (mean time to failure) is 10-50 years, 10000 disks, on average 1 disk to die per day
+  \item mo machines mo problems
+  \item Virutal Machine instances stop running without warning because it is sometimes needed somewhere else 
+  \item Software Errors: 
+  \item independent events generally, a large number don't fail all at once 
+  \item 
+\end{itemize}
+
+\subsection*{Key Ideas}
+\begin{itemize}
+  \item
+  \item
+  \item
+\end{itemize}
+
+\subsection*{Architecture / Systems Mentioned}
+\begin{itemize}
+  \item
+\end{itemize}
+
+\subsection*{Concepts and Definitions}
+\begin{itemize}
+  \item \textbf{Term}: Definition or explanation.
+\end{itemize}
+
+\subsection*{Diagrams / Mental Models}
+\begin{itemize}
+  \item
+\end{itemize}
+
+\subsection*{Notable Quotes}
+\begin{itemize}
+  \item ``''
+\end{itemize}
+
+\subsection*{Questions / Confusions}
+\begin{itemize}
+  \item
+\end{itemize}
+
+\subsection*{Practical Takeaways}
+\begin{itemize}
+  \item
+\end{itemize}
+
+\subsection*{Action Items}
+\begin{itemize}
+  \item
+\end{itemize}
+
+\newpage
+
+% Duplicate the chapter template below as needed.
+
+\end{document}
