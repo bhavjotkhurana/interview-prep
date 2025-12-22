@@ -37,7 +37,7 @@
   \item API hides implementation details from clients
   \item how do you ensure data remains correct and complete? 
   \item how do you scale? 
-  \item what API is best
+  \item what API is best? 
   \item how do you have an issue but the client can still be fine
   \item Book considers 3 concerns: reliability (toyota style), scalability, maintainibility (chnaging people should be able to work on the system productively)
   \item following chapters: architectures and algos important to achieve these
@@ -56,6 +56,18 @@
   \item telemetry: track and monitor failures
   \item discussing scalablility is trying to figure out how to cope with growth in whichever way you are growing (current load, and then incr. load)
   \item twitter example (Nov 2012 data): 4600 req./s, views 300,000 req/s, tweet volume + fan out. Two way s of implementing follower followee. Global collection is an option and then you merge those where follower and followee (original approach). do more work at write time and less at read time so just write the tweets on their home timelines (new approach). "Fan out load". Twitter now hybrids b/w the 2. Celebs are fetched separately like in Approach 1. 
+  \item System performance based on load parameters
+  \item performance numbers: Hadoop -- care about "Throughput"
+  \item median is good, mean is whatever
+  \item how bad are outliers? check percentiles like 95th, 99th, 99.5th
+  \item response time requirements at amazon are defined using p999 (99.9th percentile). (slowest one in 1000 requests) They focus on the most valuable customers. The website should be lightning fast for that top 0.1\% of person
+  \item 99.99th percentile is too hard and too expensive so you do the next best possible thing
+  \item Percentiles in practice: End user request needs to still wait for the slowest of the parallel processes. So a small percentage of slow processed requests can slow down the process a lot so you need to focus on trying to make the slowest ones faster kinda always. good, better, best. never let it rest. till your good gets better. and your better gets best. bears on 3. 1 2 3 BEARS
+  \item Tail Latency Amplification is what that previous item is called 
+  \item Forward Decay, T-Digest, HDR Histogram (algo examples that can calculate a good approx. of percentiles at min cpu and memory cost, the other way would be too expensive -- trying to calculate all request times in a minute and sorting them by time) 
+  \item Right way of aggregating response time data is histograms 
+  \item approaches for coping with load:
+  \item shared nothing architecture -- high end machines get expensive so you can't scale out sometimes so you have one machine
   \item 
 \end{itemize}
 
